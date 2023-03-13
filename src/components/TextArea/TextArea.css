@@ -1,0 +1,27 @@
+@import "../variables.css";
+
+.questionnaire__label {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  width: 100%;
+}
+
+.questionnaire__textarea {
+  background-color: var(--bg-additional);
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 200px;
+  margin-bottom: 1.1rem;
+  margin-left: 0.2rem;
+  resize: none;
+  border-radius: 10px;
+}
+
+.questionnaire__textarea:focus {
+  background-color: #ebebeb;
+  outline: 2px solid var(--bg-third);
+}
