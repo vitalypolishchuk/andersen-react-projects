@@ -1,5 +1,6 @@
 export const validateUpperCase = (value) => {
-  return /^[A-Z]\w+/.test(value);
+  if (value.length < 2) return false;
+  return value[0].split("")[0].toUpperCase() === value.split("")[0];
 };
 
 export const validateDate = (value) => {
