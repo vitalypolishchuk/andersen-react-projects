@@ -4,7 +4,12 @@ import Form from "../Form/Form";
 
 class App extends React.Component {
   render() {
-    return <Form />;
+    // .App has styles
+    return (
+      <div className="App">
+        <Form />
+      </div>
+    );
   }
 }
 

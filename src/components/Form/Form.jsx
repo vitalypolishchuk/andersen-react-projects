@@ -1,4 +1,4 @@
-import "./Form.css";
+import styles from "./Form.module.css";
 import React from "react";
 import msgSvg from "../../images/msg.svg";
 import { INPUTS, TEXTAREAS } from "../Data/Data";
@@ -110,16 +110,25 @@ class Form extends React.Component {
 
     let isValid;
 
-    if (id === "name" || id === "surname") {
-      isValid = validateUpperCase(trimmedValue);
-    } else if (id === "birthday") {
-      isValid = validateDate(trimmedValue);
-    } else if (id === "phone") {
-      isValid = validatePhone(trimmedValue);
-    } else if (id === "website") {
-      isValid = validateWebsite(trimmedValue);
-    } else if (id === "aboutMe" || id === "technologies" || id === "lastProject") {
-      isValid = validateTextArea(trimmedValue, this.state.textAreaMaxLength);
+    switch (id) {
+      case "name":
+      case "surname":
+        isValid = validateUpperCase(trimmedValue);
+        break;
+      case "birthday":
+        isValid = validateDate(trimmedValue);
+        break;
+      case "phone":
+        isValid = validatePhone(trimmedValue);
+        break;
+      case "website":
+        isValid = validateWebsite(trimmedValue);
+        break;
+      case "aboutMe":
+      case "technologies":
+      case "lastProject":
+        isValid = validateTextArea(trimmedValue, this.state.textAreaMaxLength);
+        break;
     }
 
     if (validAndFilled !== false) validAndFilled = isValid;
@@ -205,70 +214,68 @@ class Form extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="questionnaire">
-          <p className="questionnaire__title">{this.state.isShowResult ? "Результат" : "Создание анкеты"}</p>
-          <form
-            ref={this.formRef}
-            className={this.state.isShowResult ? "questionnaire__form none" : "questionnaire__form"}
-            onSubmit={this.handleSubmit}
-          >
-            {INPUTS.map((input) => {
-              return (
-                <Input
-                  key={input.id}
-                  {...input}
-                  onChange={this.onChange}
-                  value={this.state[input.id]}
-                  isValid={this.state[input.validationName]}
-                  isFilled={this.state[input.fillingName]}
-                  isSubmitted={this.state.isSubmitted}
-                  valid={false}
-                  phoneMask={input.id === "phone" ? this.phoneMask : null}
-                />
-              );
-            })}
-            {TEXTAREAS.map((textArea) => {
-              return (
-                <TextArea
-                  key={textArea.id}
-                  {...textArea}
-                  onChange={this.onChange}
-                  value={this.state[textArea.id]}
-                  isValid={this.state[textArea.validationName]}
-                  isFilled={this.state[textArea.fillingName]}
-                  isSubmitted={this.state.isSubmitted}
-                  maxLength={this.state.textAreaMaxLength}
-                />
-              );
-            })}
-            <div className="questionnaire__buttons">
-              <Button text="Отменить" type="button" handleCancel={this.handleCancel} />
-              <Button text="Отправить" type="submit" />
-            </div>
-          </form>
-          <div className={this.state.isShowResult ? "questionnaire__result" : "questionnaire__result none"}>
-            {INPUTS.map(({ id, field }) => {
-              return (
-                <div className="questionnaire__result-item" key={id}>
-                  {field}: {this.state[id]}
-                </div>
-              );
-            })}
-            {TEXTAREAS.map(({ id, field }) => {
-              return (
-                <div className="questionnaire__result-item" key={id}>
-                  {field}: {this.state[id]}
-                </div>
-              );
-            })}
+      <div className={styles.questionnaire}>
+        <p className={styles.questionnaire__title}>{this.state.isShowResult ? "Результат" : "Создание анкеты"}</p>
+        <form
+          ref={this.formRef}
+          className={this.state.isShowResult ? `${styles.questionnaire__form} ${styles.none}` : styles.questionnaire__form}
+          onSubmit={this.handleSubmit}
+        >
+          {INPUTS.map((input) => {
+            return (
+              <Input
+                key={input.id}
+                {...input}
+                onChange={this.onChange}
+                value={this.state[input.id]}
+                isValid={this.state[input.validationName]}
+                isFilled={this.state[input.fillingName]}
+                isSubmitted={this.state.isSubmitted}
+                valid={false}
+                phoneMask={input.id === "phone" ? this.phoneMask : null}
+              />
+            );
+          })}
+          {TEXTAREAS.map((textArea) => {
+            return (
+              <TextArea
+                key={textArea.id}
+                {...textArea}
+                onChange={this.onChange}
+                value={this.state[textArea.id]}
+                isValid={this.state[textArea.validationName]}
+                isFilled={this.state[textArea.fillingName]}
+                isSubmitted={this.state.isSubmitted}
+                maxLength={this.state.textAreaMaxLength}
+              />
+            );
+          })}
+          <div className={styles.questionnaire__buttons}>
             <Button text="Отменить" type="button" handleCancel={this.handleCancel} />
+            <Button text="Отправить" type="submit" />
           </div>
-          <span ref={this.svgContainer} className="questionnaire__svg-container">
-            <img src={msgSvg} alt="Your SVG" />
-          </span>
-          <PopupMessages isShowSubmittedPopup={this.state.isShowSubmittedPopup} isShowCancelledPopup={this.state.isShowCancelledPopup} />
+        </form>
+        <div className={this.state.isShowResult ? styles.questionnaire__results : `${styles.questionnaire__results} ${styles.none}`}>
+          {INPUTS.map(({ id, field }) => {
+            return (
+              <div className={styles.questionnaire__result} key={id}>
+                {field}: {this.state[id]}
+              </div>
+            );
+          })}
+          {TEXTAREAS.map(({ id, field }) => {
+            return (
+              <div className={styles.questionnaire__result} key={id}>
+                {field}: {this.state[id]}
+              </div>
+            );
+          })}
+          <Button text="Отменить" type="button" handleCancel={this.handleCancel} />
         </div>
+        <span ref={this.svgContainer} className={styles.questionnaire__svg}>
+          <img src={msgSvg} alt="Your SVG" />
+        </span>
+        <PopupMessages isShowSubmittedPopup={this.state.isShowSubmittedPopup} isShowCancelledPopup={this.state.isShowCancelledPopup} />
       </div>
     );
   }

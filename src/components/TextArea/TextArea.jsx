@@ -1,4 +1,4 @@
-import "./TextArea.css";
+import styles from "./TextArea.module.css";
 import React from "react";
 
 class TextArea extends React.Component {
@@ -7,11 +7,11 @@ class TextArea extends React.Component {
 
     return (
       <>
-        <label className="questionnaire__label" htmlFor={id}>
+        <label className={styles.questionnaire__label} htmlFor={id}>
           {field}
         </label>
         <textarea
-          className="questionnaire__textarea"
+          className={styles.questionnaire__textarea}
           value={value}
           onChange={(e) => {
             onChange({ e, id, fillingName, validationName });
@@ -19,16 +19,22 @@ class TextArea extends React.Component {
           id={id}
           rows="7"
         />
-        <div className="questionnaire__messages-container">
-          <div className={(isSubmitted && !isValid) || (isSubmitted && !isFilled) ? "questionnaire__length hidden" : "questionnaire__length"}>
-            <span>{value.length}</span>
-            <span>/</span>
-            <span>{maxLength}</span>
+        <div className={styles.questionnaire__messages}>
+          <div
+            className={
+              (isSubmitted && !isValid) || (isSubmitted && !isFilled)
+                ? `${styles.questionnaire__length} ${styles.hidden}`
+                : styles.questionnaire__length
+            }
+          >
+            <span>
+              {value.length}/{maxLength}
+            </span>
           </div>
-          <div className={isSubmitted && !isFilled ? "questionnaire__error-empty" : "questionnaire__error-empty hidden"}>
-            &#x2717; Поле пустое. Заполните пожалуйста.
+          <div className={isSubmitted && !isFilled ? styles.questionnaire__error : `${styles.questionnaire__error} ${styles.hidden}`}>
+            Поле пустое. Заполните пожалуйста.
           </div>
-          <div className={isSubmitted && value && !isValid ? "questionnaire__error-not-valid" : "questionnaire__error-not-valid hidden"}>
+          <div className={isSubmitted && value && !isValid ? styles.questionnaire__error : `${styles.questionnaire__error} ${styles.hidden}`}>
             Превышен лимит символов в поле
           </div>
         </div>

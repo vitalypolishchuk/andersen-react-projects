@@ -1,4 +1,4 @@
-import "./Button.css";
+import styles from "./Button.module.css";
 import React from "react";
 
 class Buttons extends React.Component {
@@ -7,7 +7,7 @@ class Buttons extends React.Component {
 
     return (
       <button
-        className={`questionnaire__button ${type === "button" ? "button-type-styles" : "submit-type-styles"}`}
+        className={`${styles.questionnaire__button} ${type === "button" ? styles.normal__button : styles.submit__button}`}
         type={type}
         onClick={handleCancel}
       >
