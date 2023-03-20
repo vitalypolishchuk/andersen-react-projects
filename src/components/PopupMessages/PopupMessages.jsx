@@ -1,0 +1,23 @@
+import styles from "./PopupMessages.module.css";
+import React from "react";
+
+class PopupMessages extends React.Component {
+  render() {
+    const { isShowSubmittedPopup, isShowCancelledPopup } = this.props;
+
+    return (
+      <>
+        <div className={isShowSubmittedPopup ? styles.questionnaire__sent : `${styles.questionnaire__sent} ${styles.hidden} ${styles.transparent}`}>
+          Данные отправлены!
+        </div>
+        <div
+          className={isShowCancelledPopup ? styles.questionnaire__cancel : `${styles.questionnaire__cancel} ${styles.hidden} ${styles.transparent}`}
+        >
+          Операция отменена!
+        </div>
+      </>
+    );
+  }
+}
+
+export default PopupMessages;

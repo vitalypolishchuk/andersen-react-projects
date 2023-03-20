@@ -1,0 +1,37 @@
+@import "../variables.css";
+
+.questionnaire__button {
+  display: inline-block;
+  width: inherit;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.normal__button {
+  margin-bottom: 1rem;
+}
+
+.submit__button {
+  background-color: var(--bg-third);
+  color: #ffffff;
+  font-size: 1.2rem;
+}
+
+.normal__button:hover {
+  background-color: #dbdbdb;
+}
+
+.submit__button:hover {
+  background-color: var(--bg-third-hover);
+}
+
+@media screen and (min-width: 768px) {
+  .questionnaire__button {
+    width: 45%;
+    max-width: 200px;
+  }
+  .normal__button {
+    margin-bottom: 0rem;
+  }
+}
