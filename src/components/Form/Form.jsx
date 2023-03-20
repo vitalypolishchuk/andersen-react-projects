@@ -1,7 +1,6 @@
-import "./Form.css";
+import styles from "./Form.module.css";
 import { useState, useEffect, useRef } from "react";
 import msgSvg from "../../images/msg.svg";
-import { INPUTS, TEXTAREAS } from "../Data/Data";
 import { validateUpperCase, validateDate, validatePhone, validateWebsite, validateTextArea } from "../Validation/Validation";
 import Input from "../Input/Input";
 import TextArea from "../TextArea/TextArea";
@@ -54,6 +53,139 @@ const Form = () => {
   // show result of the submit
   const [isShowResult, setIsShowResult] = useState(false);
 
+  const inputData = [
+    {
+      id: "name",
+      field: "Имя",
+      inputType: "text",
+      placeholder: "Иван",
+      value: name,
+      setValue: setName,
+      isValid: isNameValid,
+      isFilled: isNameFilled,
+      setValid: setIsNameValid,
+      setFilled: setIsNameFilled,
+    },
+    {
+      id: "surname",
+      field: "Фамилия",
+      inputType: "text",
+      placeholder: "Иваненко",
+      value: surname,
+      setValue: setSurname,
+      isValid: isSurnameValid,
+      isFilled: isSurnameFilled,
+      setValid: setIsSurnameValid,
+      setFilled: setIsSurnameFilled,
+    },
+    {
+      id: "birthday",
+      field: "Дата Рождения",
+      inputType: "date",
+      placeholder: "",
+      value: birthday,
+      setValue: setBirthday,
+      isValid: isBirthdayValid,
+      isFilled: isBirthdayFilled,
+      setValid: setIsBirthdayValid,
+      setFilled: setIsBirthdayFilled,
+    },
+    {
+      id: "phone",
+      field: "Телефон",
+      inputType: "text",
+      placeholder: "+123456789",
+      value: phone,
+      setValue: setPhone,
+      isValid: isPhoneValid,
+      isFilled: isPhoneFilled,
+      setValid: setIsPhoneValid,
+      setFilled: setIsPhoneFilled,
+    },
+    {
+      id: "website",
+      field: "Сайт",
+      inputType: "text",
+      placeholder: "https://localhost:3000",
+      value: website,
+      setValue: setWebsite,
+      isValid: isWebsiteValid,
+      isFilled: isWebsiteFilled,
+      setValid: setIsWebsiteValid,
+      setFilled: setIsWebsiteFilled,
+    },
+  ];
+
+  const textAreaData = [
+    {
+      id: "aboutMe",
+      field: "О себе",
+      value: aboutMe,
+      setValue: setAboutMe,
+      isValid: isAboutMeValid,
+      isFilled: isAboutMeFilled,
+      setValid: setIsAboutMeValid,
+      setFilled: setIsAboutMeFilled,
+    },
+    {
+      id: "technologies",
+      field: "Стек технологий",
+      value: technologies,
+      setValue: setTechnologies,
+      isValid: isTechnologiesValid,
+      isFilled: isTechnologiesFilled,
+      setValid: setIsTechnologiesValid,
+      setFilled: setIsTechnologiesFilled,
+    },
+    {
+      id: "lastProject",
+      field: "Описание последнего проекта",
+      value: lastProject,
+      setValue: setLastProject,
+      isValid: isLastProjectValid,
+      isFilled: isLastProjectFilled,
+      setValid: setIsLastProjectValid,
+      setFilled: setIsLastProjectFilled,
+    },
+  ];
+
+  const handleCancel = () => {
+    setName("");
+    setSurname("");
+    setBirthday("");
+    setPhone("");
+    setWebsite("");
+    setAboutMe("");
+    setTechnologies("");
+    setLastProject("");
+
+    setIsNameValid(false);
+    setIsSurnameValid(false);
+    setIsBirthdayValid(false);
+    setIsPhoneValid(false);
+    setIsWebsiteValid(false);
+    setIsAboutMeValid(false);
+    setIsTechnologiesValid(false);
+    setIsLastProjectValid(false);
+
+    setIsNameFilled(false);
+    setIsSurnameFilled(false);
+    setIsBirthdayFilled(false);
+    setIsPhoneFilled(false);
+    setIsWebsiteFilled(false);
+    setIsAboutMeFilled(false);
+    setIsTechnologiesFilled(false);
+    setIsLastProjectFilled(false);
+
+    setTextAreaMaxLength(600);
+
+    setIsShowCancelledPopup(true);
+    setIsShowSubmittedPopup(false);
+
+    setIsSubmitted(false);
+    setIsShowResult(false);
+  };
+
   const handleSvgScroll = (e) => {
     formRef.current.scrollBy(e.deltaX, e.deltaY);
     resultRef.current.scrollBy(e.deltaX, e.deltaY);
@@ -61,10 +193,11 @@ const Form = () => {
 
   useEffect(() => {
     // user should be able to scroll the form, even when scrolling on SVG
-    svgContainer.current.addEventListener("wheel", handleSvgScroll);
+    const svgContainerRef = svgContainer.current;
+    svgContainerRef.addEventListener("wheel", handleSvgScroll);
 
     return () => {
-      svgContainer.current.removeEventListener("wheel", handleSvgScroll);
+      svgContainerRef.removeEventListener("wheel", handleSvgScroll);
     };
   }, []);
 
@@ -96,82 +229,7 @@ const Form = () => {
     };
   }, [isShowSubmittedPopup]);
 
-  const getStateData = (id) => {
-    if (id === "name")
-      return {
-        value: name,
-        setValue: setName,
-        isValid: isNameValid,
-        isFilled: isNameFilled,
-        setValid: setIsNameValid,
-        setFilled: setIsNameFilled,
-      };
-    if (id === "surname")
-      return {
-        value: surname,
-        setValue: setSurname,
-        isValid: isSurnameValid,
-        isFilled: isSurnameFilled,
-        setValid: setIsSurnameValid,
-        setFilled: setIsSurnameFilled,
-      };
-    if (id === "birthday")
-      return {
-        value: birthday,
-        setValue: setBirthday,
-        isValid: isBirthdayValid,
-        isFilled: isBirthdayFilled,
-        setValid: setIsBirthdayValid,
-        setFilled: setIsBirthdayFilled,
-      };
-    if (id === "phone")
-      return {
-        value: phone,
-        setValue: setPhone,
-        isValid: isPhoneValid,
-        isFilled: isPhoneFilled,
-        setValid: setIsPhoneValid,
-        setFilled: setIsPhoneFilled,
-      };
-    if (id === "website")
-      return {
-        value: website,
-        setValue: setWebsite,
-        isValid: isWebsiteValid,
-        isFilled: isWebsiteFilled,
-        setValid: setIsWebsiteValid,
-        setFilled: setIsWebsiteFilled,
-      };
-    if (id === "aboutMe")
-      return {
-        value: aboutMe,
-        setValue: setAboutMe,
-        isValid: isAboutMeValid,
-        isFilled: isAboutMeFilled,
-        setValid: setIsAboutMeValid,
-        setFilled: setIsAboutMeFilled,
-      };
-    if (id === "technologies")
-      return {
-        value: technologies,
-        setValue: setTechnologies,
-        isValid: isTechnologiesValid,
-        isFilled: isTechnologiesFilled,
-        setValid: setIsTechnologiesValid,
-        setFilled: setIsTechnologiesFilled,
-      };
-    if (id === "lastProject")
-      return {
-        value: lastProject,
-        setValue: setLastProject,
-        isValid: isLastProjectValid,
-        isFilled: isLastProjectFilled,
-        setValid: setIsLastProjectValid,
-        setFilled: setIsLastProjectFilled,
-      };
-  };
-
-  const validate = ({ value, id, setValid, setFilled }) => {
+  const validate = ({ id, value, setValid, setFilled }) => {
     // remove spaces from the beginning and the end
     const trimmedValue = value.trim();
 
@@ -233,7 +291,7 @@ const Form = () => {
     // if the info was submitted, it does not mean that all the fields are valid or filled!
     // if the user, after submission changed any values, we need to validate them once again!
     if (isSubmitted) {
-      validate({ value, id, setValid, setFilled });
+      validate({ id, value, setValid, setFilled });
     }
   };
 
@@ -244,11 +302,10 @@ const Form = () => {
 
     let allValuesValidAndFilled;
 
-    for (let input of [...INPUTS, ...TEXTAREAS]) {
-      const { id } = input;
-      const { value, setValid, setFilled } = getStateData(id);
+    for (let item of [...inputData, ...textAreaData]) {
+      const { id, value, setValid, setFilled } = item;
 
-      const isValidFilled = validate({ value, id, setValid, setFilled });
+      const isValidFilled = validate({ id, value, setValid, setFilled });
 
       if (allValuesValidAndFilled !== false) {
         allValuesValidAndFilled = isValidFilled;
@@ -261,95 +318,44 @@ const Form = () => {
     }
   };
 
-  const handleCancel = () => {
-    setName("");
-    setSurname("");
-    setBirthday("");
-    setPhone("");
-    setWebsite("");
-    setAboutMe("");
-    setTechnologies("");
-    setLastProject("");
-
-    setIsNameValid(false);
-    setIsSurnameValid(false);
-    setIsBirthdayValid(false);
-    setIsPhoneValid(false);
-    setIsWebsiteValid(false);
-    setIsAboutMeValid(false);
-    setIsTechnologiesValid(false);
-    setIsLastProjectValid(false);
-
-    setIsNameFilled(false);
-    setIsSurnameFilled(false);
-    setIsBirthdayFilled(false);
-    setIsPhoneFilled(false);
-    setIsWebsiteFilled(false);
-    setIsAboutMeFilled(false);
-    setIsTechnologiesFilled(false);
-    setIsLastProjectFilled(false);
-
-    setTextAreaMaxLength(600);
-
-    setIsShowCancelledPopup(true);
-    setIsShowSubmittedPopup(false);
-
-    setIsSubmitted(false);
-    setIsShowResult(false);
-  };
-
   return (
     <div className="App">
-      <div className="questionnaire">
-        <p className="questionnaire__title">{isShowResult ? "Результат" : "Создание анкеты"}</p>
-        <form ref={formRef} className={isShowResult ? "questionnaire__form none" : "questionnaire__form"} onSubmit={handleSubmit}>
-          {INPUTS.map((input) => {
-            return (
-              <Input
-                key={input.id}
-                {...input}
-                onChange={onChange}
-                stateData={getStateData(input.id)}
-                isSubmitted={isSubmitted}
-                phoneMask={input.id === "phone" ? phoneMask : null}
-              />
-            );
+      <div className={styles.questionnaire}>
+        <p className={styles.questionnaire__title}>{isShowResult ? "Результат" : "Создание анкеты"}</p>
+        <form
+          ref={formRef}
+          className={isShowResult ? `${styles.questionnaire__form} ${styles.none}` : styles.questionnaire__form}
+          onSubmit={handleSubmit}
+        >
+          {inputData.map((input) => {
+            return <Input key={input.id} {...input} onChange={onChange} isSubmitted={isSubmitted} />;
           })}
-          {TEXTAREAS.map((textArea) => {
-            return (
-              <TextArea
-                key={textArea.id}
-                {...textArea}
-                onChange={onChange}
-                stateData={getStateData(textArea.id)}
-                isSubmitted={isSubmitted}
-                maxLength={textAreaMaxLength}
-              />
-            );
+          {textAreaData.map((textArea) => {
+            return <TextArea key={textArea.id} {...textArea} onChange={onChange} isSubmitted={isSubmitted} maxLength={textAreaMaxLength} />;
           })}
-          <div className="questionnaire__buttons">
+          <div className={styles.questionnaire__buttons}>
             <Button text="Отменить" type="button" handleCancel={handleCancel} />
             <Button text="Отправить" type="submit" />
           </div>
         </form>
-        <div ref={resultRef} className={isShowResult ? "questionnaire__result" : "questionnaire__result none"}>
-          {INPUTS.map(({ id, field }) => {
+        <div ref={resultRef} className={isShowResult ? styles.questionnaire__results : `${styles.questionnaire__results} ${styles.none}`}>
+          {inputData.map(({ id, field, value }) => {
             return (
-              <div className="questionnaire__result-item" key={id}>
-                {field}: {getStateData(id).value}
+              <div className={styles.questionnaire__result} key={id}>
+                {field}: {value}
               </div>
             );
           })}
-          {TEXTAREAS.map(({ id, field }) => {
+          {textAreaData.map(({ id, field, value }) => {
             return (
-              <div className="questionnaire__result-item" key={id}>
-                {field}: {getStateData(id).value}
+              <div className={styles.questionnaire__result} key={id}>
+                {field}: {value}
               </div>
             );
           })}
           <Button text="Отменить" type="button" handleCancel={handleCancel} />
         </div>
-        <span ref={svgContainer} className="questionnaire__svg-container">
+        <span ref={svgContainer} className={styles.questionnaire__svg}>
           <img src={msgSvg} alt="Your SVG" />
         </span>
         <PopupMessages isShowSubmittedPopup={isShowSubmittedPopup} isShowCancelledPopup={isShowCancelledPopup} />

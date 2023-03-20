@@ -1,4 +1,4 @@
-import "./PopupMessages.css";
+import styles from "./PopupMessages.module.css";
 import React from "react";
 
 const PopupMessages = (props) => {
@@ -6,20 +6,10 @@ const PopupMessages = (props) => {
 
   return (
     <>
-      <div
-        className={
-          isShowSubmittedPopup ? "questionnaire__msg questionnaire__sent-color" : "questionnaire__msg questionnaire__sent-color hidden transparent"
-        }
-      >
+      <div className={isShowSubmittedPopup ? styles.questionnaire__sent : `${styles.questionnaire__sent} ${styles.hidden} ${styles.transparent}`}>
         Данные отправлены!
       </div>
-      <div
-        className={
-          isShowCancelledPopup
-            ? "questionnaire__msg questionnaire__cancelled-color"
-            : "questionnaire__msg questionnaire__cancelled-color hidden transparent"
-        }
-      >
+      <div className={isShowCancelledPopup ? styles.questionnaire__cancel : `${styles.questionnaire__cancel} ${styles.hidden} ${styles.transparent}`}>
         Операция отменена!
       </div>
     </>

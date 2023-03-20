@@ -1,10 +1,5 @@
 @import "../variables.css";
 
-.questionnaire__buttons {
-  width: 100%;
-  max-width: 200px;
-}
-
 .questionnaire__button {
   display: inline-block;
   width: inherit;
@@ -13,35 +8,30 @@
   cursor: pointer;
 }
 
-.button-type-styles {
+.normal__button {
   margin-bottom: 1rem;
 }
 
-.submit-type-styles {
+.submit__button {
   background-color: var(--bg-third);
   color: #ffffff;
   font-size: 1.2rem;
 }
 
-.button-type-styles:hover {
+.normal__button:hover {
   background-color: #dbdbdb;
 }
 
-.submit-type-styles:hover {
+.submit__button:hover {
   background-color: var(--bg-third-hover);
 }
 
 @media screen and (min-width: 768px) {
-  .questionnaire__buttons {
-    width: 30%;
-    display: flex;
-    justify-content: space-between;
-  }
   .questionnaire__button {
     width: 45%;
     max-width: 200px;
   }
-  .button-type-styles {
+  .normal__button {
     margin-bottom: 0rem;
   }
 }

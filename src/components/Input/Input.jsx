@@ -1,19 +1,14 @@
-import "./Input.css";
+import styles from "./Input.module.css";
 import React from "react";
 
-const Input = (props) => {
-  const { field, inputType, id, placeholder, onChange, stateData, isSubmitted } = props;
-  const { value, setValue, isValid, isFilled, setValid, setFilled } = stateData;
-
-  console.log(id);
-
+const Input = ({ id, field, inputType, placeholder, value, setValue, isValid, isFilled, setValid, setFilled, onChange, isSubmitted }) => {
   return (
     <>
-      <label className="questionnaire__label" htmlFor={id}>
+      <label className={styles.questionnaire__label} htmlFor={id}>
         {field}
       </label>
       <input
-        className="questionnaire__input"
+        className={styles.questionnaire__input}
         value={value}
         onChange={(e) => {
           onChange({ e, id, setValue, setValid, setFilled });
@@ -24,11 +19,11 @@ const Input = (props) => {
         autoComplete="off"
       />
 
-      <div className="questionnaire__errors">
-        <div className={isSubmitted && !isFilled ? "questionnaire__error-empty" : "questionnaire__error-empty hidden"}>
+      <div className={styles.questionnaire__errors}>
+        <div className={isSubmitted && !isFilled ? styles.questionnaire__error : `${styles.questionnaire__error} ${styles.hidden}`}>
           &#x2717; Поле пустое. Заполните пожалуйста.
         </div>
-        <div className={isSubmitted && value && !isValid ? "questionnaire__error-not-valid" : "questionnaire__error-not-valid hidden"}>
+        <div className={isSubmitted && value && !isValid ? styles.questionnaire__error : `${styles.questionnaire__error} ${styles.hidden}`}>
           Что-то пошло не так.
         </div>
       </div>
