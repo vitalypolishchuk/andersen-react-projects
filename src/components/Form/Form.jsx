@@ -245,16 +245,25 @@ const Form = () => {
 
     let isValid;
 
-    if (id === "name" || id === "surname") {
-      isValid = validateUpperCase(trimmedValue);
-    } else if (id === "birthday") {
-      isValid = validateDate(trimmedValue);
-    } else if (id === "phone") {
-      isValid = validatePhone(trimmedValue);
-    } else if (id === "website") {
-      isValid = validateWebsite(trimmedValue);
-    } else if (id === "aboutMe" || id === "technologies" || id === "lastProject") {
-      isValid = validateTextArea(trimmedValue, textAreaMaxLength);
+    switch (id) {
+      case "name":
+      case "surname":
+        isValid = validateUpperCase(trimmedValue);
+        break;
+      case "birthday":
+        isValid = validateDate(trimmedValue);
+        break;
+      case "phone":
+        isValid = validatePhone(trimmedValue);
+        break;
+      case "website":
+        isValid = validateWebsite(trimmedValue);
+        break;
+      case "aboutMe":
+      case "technologies":
+      case "lastProject":
+        isValid = validateTextArea(trimmedValue, this.state.textAreaMaxLength);
+        break;
     }
 
     if (validAndFilled !== false) validAndFilled = isValid;

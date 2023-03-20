@@ -1,5 +1,5 @@
 export const validateUpperCase = (value) => {
-  return /^[A-Z]\w+/.test(value);
+  return /^[A-ZА-Я]\w+/.test(value);
 };
 
 export const validateDate = (value) => {
