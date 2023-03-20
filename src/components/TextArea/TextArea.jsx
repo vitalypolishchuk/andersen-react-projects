@@ -24,12 +24,12 @@ const TextArea = ({ id, field, value, setValue, isValid, isFilled, setValid, set
               : styles.questionnaire__length
           }
         >
-          <span>{value.length}</span>
-          <span>/</span>
-          <span>{maxLength}</span>
+          <span>
+            {value.length}/{maxLength}
+          </span>
         </div>
         <div className={isSubmitted && !isFilled ? styles.questionnaire__error : `${styles.questionnaire__error} ${styles.hidden}`}>
-          &#x2717; Поле пустое. Заполните пожалуйста.
+          Поле пустое. Заполните пожалуйста.
         </div>
         <div className={isSubmitted && value && !isValid ? styles.questionnaire__error : `${styles.questionnaire__error} ${styles.hidden}`}>
           Превышен лимит символов в поле

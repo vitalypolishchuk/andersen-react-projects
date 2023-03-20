@@ -21,7 +21,7 @@ const Input = ({ id, field, inputType, placeholder, value, setValue, isValid, is
 
       <div className={styles.questionnaire__errors}>
         <div className={isSubmitted && !isFilled ? styles.questionnaire__error : `${styles.questionnaire__error} ${styles.hidden}`}>
-          &#x2717; Поле пустое. Заполните пожалуйста.
+          Поле пустое. Заполните пожалуйста.
         </div>
         <div className={isSubmitted && value && !isValid ? styles.questionnaire__error : `${styles.questionnaire__error} ${styles.hidden}`}>
           Что-то пошло не так.
