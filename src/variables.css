@@ -1,0 +1,11 @@
+:root {
+  --bg--clr-main: #eeeeee;
+  --bg-clr-secondary-1: rgba(87, 191, 245);
+  --bg-clr-secondary-1-hover: rgb(81, 178, 231);
+  --bg-clr-secondary-2: rgb(37, 225, 84);
+  --bg-clr-secondary-2-hover: rgb(34, 211, 79);
+  --clr-dark-gray: rgb(67, 67, 67);
+  --clr-light-gray: rgb(104, 104, 104);
+  --gradient-blue: linear-gradient(90deg, rgba(25, 90, 189, 1) 0%, rgba(48, 144, 232, 1) 40%, rgba(87, 191, 245, 1) 100%);
+  --gradient-blue-hover: linear-gradient(90deg, rgb(24, 85, 177) 0%, rgb(46, 136, 220) 40%, rgb(83, 179, 231) 100%);
+}

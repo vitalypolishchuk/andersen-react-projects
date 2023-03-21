@@ -1,0 +1,64 @@
+.active_tasks,
+.done_tasks {
+  height: 40px;
+  text-align: center;
+  border: none;
+  font-size: 1.2rem;
+  color: #fff;
+  position: relative;
+}
+
+.active_tasks {
+  margin-bottom: 0.5rem;
+  background-color: var(--bg-clr-secondary-1);
+}
+
+.active_tasks:hover {
+  background-color: var(--bg-clr-secondary-1-hover);
+}
+
+.done_tasks {
+  background-color: var(--bg-clr-secondary-2);
+}
+
+.done_tasks:hover {
+  background-color: var(--bg-clr-secondary-2-hover);
+}
+
+.active__icon,
+.done__icon {
+  display: inline-block;
+  position: absolute;
+  bottom: 74%;
+  right: 90%;
+  color: #fff;
+  font-size: 1.5rem;
+  display: none;
+  padding: 0.2rem 0.4rem;
+  border-radius: 50%;
+}
+
+.active__icon {
+  background-color: rgb(1, 63, 207);
+}
+
+.done__icon {
+  background-color: rgb(0, 128, 0);
+}
+
+@media screen and (min-width: 586px) {
+  .active_tasks,
+  .done_tasks {
+    height: auto;
+    width: 45%;
+    height: 100px;
+    border-radius: 3%;
+  }
+  .active_tasks {
+    margin-bottom: 0rem;
+  }
+  .active__icon,
+  .done__icon {
+    display: inline-block;
+  }
+}
