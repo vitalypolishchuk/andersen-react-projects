@@ -1,0 +1,18 @@
+.button__submit {
+  display: inline-block;
+  width: 100%;
+  font-size: 1.2rem;
+  height: 49px;
+  background: var(--gradient-blue);
+  color: #fff;
+  border: none;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button__submit:hover {
+  background: var(--gradient-blue-hover);
+  color: #fff;
+}

@@ -1,0 +1,63 @@
+.container {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+}
+
+.label {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.input_container {
+  position: relative;
+  height: 60px;
+}
+
+.input {
+  height: 100%;
+  width: 100%;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 5px;
+  padding: 0 2rem;
+}
+
+.icon {
+  border: none;
+  background-color: transparent;
+  top: 50%;
+  left: 93%;
+  font-size: 1.1rem;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  cursor: pointer;
+  color: rgb(176, 176, 176);
+  font-size: 1.3rem;
+}
+
+@media screen and (min-width: 586px) {
+  .input_container {
+    position: relative;
+    height: 80px;
+  }
+  .input {
+    font-size: 2rem;
+    padding: 0 3rem;
+  }
+  .icon {
+    left: 95%;
+    font-size: 1.7rem;
+  }
+}
+
+.blue {
+  color: rgb(1, 63, 207);
+}
+
+.warning {
+  background-color: rgb(255, 240, 240);
+}
