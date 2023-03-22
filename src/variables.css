@@ -8,4 +8,6 @@
   --clr-light-gray: rgb(104, 104, 104);
   --gradient-blue: linear-gradient(90deg, rgba(25, 90, 189, 1) 0%, rgba(48, 144, 232, 1) 40%, rgba(87, 191, 245, 1) 100%);
   --gradient-blue-hover: linear-gradient(90deg, rgb(24, 85, 177) 0%, rgb(46, 136, 220) 40%, rgb(83, 179, 231) 100%);
+
+  --gradient-blue-2: linear-gradient(90deg, rgba(25, 90, 189, 1) 0%, rgba(48, 144, 232, 1) 20%, rgba(87, 191, 245, 1) 100%);
 }
