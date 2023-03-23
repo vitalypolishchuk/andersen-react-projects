@@ -1,17 +1,18 @@
 import styles from "./Input.module.css";
 import React from "react";
 
-const Input = ({ id, field, inputType, placeholder, value, setValue, isValid, isFilled, setValid, setFilled, onChange, isSubmitted }) => {
+const Input = ({ id, field, inputType, placeholder, value, formError, onChange, isSubmitted }) => {
   return (
     <>
       <label className={styles.questionnaire__label} htmlFor={id}>
         {field}
       </label>
+
       <input
         className={styles.questionnaire__input}
         value={value}
         onChange={(e) => {
-          onChange({ e, id, setValue, setValid, setFilled });
+          onChange({ e, id });
         }}
         type={inputType}
         id={id}
@@ -20,12 +21,7 @@ const Input = ({ id, field, inputType, placeholder, value, setValue, isValid, is
       />
 
       <div className={styles.questionnaire__errors}>
-        <div className={isSubmitted && !isFilled ? styles.questionnaire__error : `${styles.questionnaire__error} ${styles.hidden}`}>
-          Поле пустое. Заполните пожалуйста.
-        </div>
-        <div className={isSubmitted && value && !isValid ? styles.questionnaire__error : `${styles.questionnaire__error} ${styles.hidden}`}>
-          Что-то пошло не так.
-        </div>
+        <div className={isSubmitted && formError ? styles.questionnaire__error : styles.hidden}>{formError}</div>
       </div>
     </>
   );

@@ -6,185 +6,17 @@ import Input from "../Input/Input";
 import TextArea from "../TextArea/TextArea";
 import Button from "../Button/Button";
 import PopupMessages from "../PopupMessages/PopupMessages";
+import { inputData, textAreaData } from "./FormData";
+import { initialState } from "./FormState";
 
 const Form = () => {
   const svgContainer = useRef(null);
   const formRef = useRef(null);
   const resultRef = useRef(null);
 
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [birthday, setBirthday] = useState("");
-  const [phone, setPhone] = useState("");
-  const [website, setWebsite] = useState("");
-  const [aboutMe, setAboutMe] = useState("");
-  const [technologies, setTechnologies] = useState("");
-  const [lastProject, setLastProject] = useState("");
+  const [formState, setFormState] = useState(initialState);
 
-  // if Valid is TRUE it means that the value is VALID
-  const [isNameValid, setIsNameValid] = useState(false);
-  const [isSurnameValid, setIsSurnameValid] = useState(false);
-  const [isBirthdayValid, setIsBirthdayValid] = useState(false);
-  const [isPhoneValid, setIsPhoneValid] = useState(false);
-  const [isWebsiteValid, setIsWebsiteValid] = useState(false);
-  const [isAboutMeValid, setIsAboutMeValid] = useState(false);
-  const [isTechnologiesValid, setIsTechnologiesValid] = useState(false);
-  const [isLastProjectValid, setIsLastProjectValid] = useState(false);
-
-  // If Filled is TRUE it means that the value is NOT empty
-  const [isNameFilled, setIsNameFilled] = useState(false);
-  const [isSurnameFilled, setIsSurnameFilled] = useState(false);
-  const [isBirthdayFilled, setIsBirthdayFilled] = useState(false);
-  const [isPhoneFilled, setIsPhoneFilled] = useState(false);
-  const [isWebsiteFilled, setIsWebsiteFilled] = useState(false);
-  const [isAboutMeFilled, setIsAboutMeFilled] = useState(false);
-  const [isTechnologiesFilled, setIsTechnologiesFilled] = useState(false);
-  const [isLastProjectFilled, setIsLastProjectFilled] = useState(false);
-
-  const [textAreaMaxLength, setTextAreaMaxLength] = useState(600);
-
-  // if the form is cancelled, show popup
-  const [isShowCancelledPopup, setIsShowCancelledPopup] = useState(false);
-  // if the form is submitted, show popup
-  const [isShowSubmittedPopup, setIsShowSubmittedPopup] = useState(false);
-
-  // isSubmitted is TRUE once the user clicks on "SUBMIT" button, but it does not mean that the fields are valid or filled
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  // show result of the submit
-  const [isShowResult, setIsShowResult] = useState(false);
-
-  const inputData = [
-    {
-      id: "name",
-      field: "Имя",
-      inputType: "text",
-      placeholder: "Иван",
-      value: name,
-      setValue: setName,
-      isValid: isNameValid,
-      isFilled: isNameFilled,
-      setValid: setIsNameValid,
-      setFilled: setIsNameFilled,
-    },
-    {
-      id: "surname",
-      field: "Фамилия",
-      inputType: "text",
-      placeholder: "Иваненко",
-      value: surname,
-      setValue: setSurname,
-      isValid: isSurnameValid,
-      isFilled: isSurnameFilled,
-      setValid: setIsSurnameValid,
-      setFilled: setIsSurnameFilled,
-    },
-    {
-      id: "birthday",
-      field: "Дата Рождения",
-      inputType: "date",
-      placeholder: "",
-      value: birthday,
-      setValue: setBirthday,
-      isValid: isBirthdayValid,
-      isFilled: isBirthdayFilled,
-      setValid: setIsBirthdayValid,
-      setFilled: setIsBirthdayFilled,
-    },
-    {
-      id: "phone",
-      field: "Телефон",
-      inputType: "text",
-      placeholder: "+123456789",
-      value: phone,
-      setValue: setPhone,
-      isValid: isPhoneValid,
-      isFilled: isPhoneFilled,
-      setValid: setIsPhoneValid,
-      setFilled: setIsPhoneFilled,
-    },
-    {
-      id: "website",
-      field: "Сайт",
-      inputType: "text",
-      placeholder: "https://localhost:3000",
-      value: website,
-      setValue: setWebsite,
-      isValid: isWebsiteValid,
-      isFilled: isWebsiteFilled,
-      setValid: setIsWebsiteValid,
-      setFilled: setIsWebsiteFilled,
-    },
-  ];
-
-  const textAreaData = [
-    {
-      id: "aboutMe",
-      field: "О себе",
-      value: aboutMe,
-      setValue: setAboutMe,
-      isValid: isAboutMeValid,
-      isFilled: isAboutMeFilled,
-      setValid: setIsAboutMeValid,
-      setFilled: setIsAboutMeFilled,
-    },
-    {
-      id: "technologies",
-      field: "Стек технологий",
-      value: technologies,
-      setValue: setTechnologies,
-      isValid: isTechnologiesValid,
-      isFilled: isTechnologiesFilled,
-      setValid: setIsTechnologiesValid,
-      setFilled: setIsTechnologiesFilled,
-    },
-    {
-      id: "lastProject",
-      field: "Описание последнего проекта",
-      value: lastProject,
-      setValue: setLastProject,
-      isValid: isLastProjectValid,
-      isFilled: isLastProjectFilled,
-      setValid: setIsLastProjectValid,
-      setFilled: setIsLastProjectFilled,
-    },
-  ];
-
-  const handleCancel = () => {
-    setName("");
-    setSurname("");
-    setBirthday("");
-    setPhone("");
-    setWebsite("");
-    setAboutMe("");
-    setTechnologies("");
-    setLastProject("");
-
-    setIsNameValid(false);
-    setIsSurnameValid(false);
-    setIsBirthdayValid(false);
-    setIsPhoneValid(false);
-    setIsWebsiteValid(false);
-    setIsAboutMeValid(false);
-    setIsTechnologiesValid(false);
-    setIsLastProjectValid(false);
-
-    setIsNameFilled(false);
-    setIsSurnameFilled(false);
-    setIsBirthdayFilled(false);
-    setIsPhoneFilled(false);
-    setIsWebsiteFilled(false);
-    setIsAboutMeFilled(false);
-    setIsTechnologiesFilled(false);
-    setIsLastProjectFilled(false);
-
-    setTextAreaMaxLength(600);
-
-    setIsShowCancelledPopup(true);
-    setIsShowSubmittedPopup(false);
-
-    setIsSubmitted(false);
-    setIsShowResult(false);
-  };
+  const handleCancel = () => {};
 
   const handleSvgScroll = (e) => {
     formRef.current.scrollBy(e.deltaX, e.deltaY);
@@ -204,44 +36,36 @@ const Form = () => {
   useEffect(() => {
     let timerId;
 
-    if (isShowCancelledPopup) {
+    if (formState.isShowCancelledPopup) {
       timerId = setTimeout(() => {
-        setIsShowCancelledPopup(false);
+        setFormState((prevState) => ({ ...prevState, isShowCancelledPopup: false }));
       }, 5000);
     }
 
     return () => {
       clearTimeout(timerId);
     };
-  }, [isShowCancelledPopup]);
+  }, [formState.isShowCancelledPopup]);
 
   useEffect(() => {
     let timerId;
 
-    if (isShowSubmittedPopup) {
+    if (formState.isShowSubmittedPopup) {
       timerId = setTimeout(() => {
-        setIsShowSubmittedPopup(false);
+        setFormState((prevState) => ({ ...prevState, isShowSubmittedPopup: false }));
       }, 5000);
     }
 
     return () => {
       clearTimeout(timerId);
     };
-  }, [isShowSubmittedPopup]);
+  }, [formState.isShowSubmittedPopup]);
 
-  const validate = ({ id, value, setValid, setFilled }) => {
+  const validate = ({ id, value }) => {
     // remove spaces from the beginning and the end
     const trimmedValue = value.trim();
 
-    // make sure that the value is both filled and valid
-    let validAndFilled;
-
-    if (trimmedValue !== "") {
-      setFilled(true);
-    } else {
-      validAndFilled = false;
-      setFilled(false);
-    }
+    if (trimmedValue === "") return "Поле не заполнено";
 
     let isValid;
 
@@ -262,16 +86,14 @@ const Form = () => {
       case "aboutMe":
       case "technologies":
       case "lastProject":
-        isValid = validateTextArea(trimmedValue, this.state.textAreaMaxLength);
+        isValid = validateTextArea(trimmedValue, formState.textAreaMaxLength);
         break;
     }
 
-    if (validAndFilled !== false) validAndFilled = isValid;
-    setValid(isValid);
-    return validAndFilled;
+    if (!isValid) return "Что-то пошло не так";
   };
 
-  const phoneMask = ({ setValue, value }) => {
+  const phoneMask = ({ id, value }) => {
     const patterns = {
       removeLetters: /\D/g,
       addHyphen: /^(\d)/,
@@ -285,69 +107,92 @@ const Form = () => {
       .replace(patterns.addHyphen2, "$1-$2-")
       .replace(patterns.addHyphen3, "$1-$2-$3-");
 
-    setValue(newValue);
+    setFormState({ ...formState, fields: { ...formState.fields, [id]: newValue } });
   };
 
-  const onChange = ({ e, id, setValue, setValid, setFilled }) => {
+  const onChange = ({ e, id }) => {
     const value = e.target.value;
 
     if (id === "phone") {
-      phoneMask({ setValue, value });
+      phoneMask({ id, value });
     } else {
-      setValue(value);
+      setFormState({ ...formState, fields: { ...formState.fields, [id]: value } });
     }
 
     // if the info was submitted, it does not mean that all the fields are valid or filled!
     // if the user, after submission changed any values, we need to validate them once again!
-    if (isSubmitted) {
-      validate({ id, value, setValid, setFilled });
+    if (formState.isSubmitted) {
+      const err = validate({ id, value });
+      setFormState({ ...formState, formErrors: { ...formState.formErrors, [id]: err }, fields: { ...formState.fields, [id]: value } });
     }
   };
 
   const handleSubmit = (e) => {
     if (e) e.preventDefault();
 
-    setIsSubmitted(true);
-
     let allValuesValidAndFilled;
+    let formErrorsNew = { ...formState.formErrors };
 
-    for (let item of [...inputData, ...textAreaData]) {
-      const { id, value, setValid, setFilled } = item;
-
-      const isValidFilled = validate({ id, value, setValid, setFilled });
+    for (let [id, value] of Object.entries(formState.fields)) {
+      const err = validate({ id, value });
+      formErrorsNew[id] = err;
 
       if (allValuesValidAndFilled !== false) {
-        allValuesValidAndFilled = isValidFilled;
+        if (err === "") {
+          allValuesValidAndFilled = true;
+        } else {
+          allValuesValidAndFilled = false;
+        }
       }
     }
 
+    setFormState({ ...formState, formErrors: formErrorsNew, isSubmitted: true });
+
     if (allValuesValidAndFilled) {
-      setIsShowSubmittedPopup(true);
-      setIsShowResult(true);
+      setFormState({ ...formState, isShowSubmittedPopup: true, isShowCancelledPopup: true });
     }
   };
 
   return (
     <div className="App">
       <div className={styles.questionnaire}>
-        <p className={styles.questionnaire__title}>{isShowResult ? "Результат" : "Создание анкеты"}</p>
+        <p className={styles.questionnaire__title}>{formState.isShowResult ? "Результат" : "Создание анкеты"}</p>
         <form
           ref={formRef}
-          className={isShowResult ? `${styles.questionnaire__form} ${styles.none}` : styles.questionnaire__form}
+          className={formState.isShowResult ? `${styles.questionnaire__form} ${styles.none}` : styles.questionnaire__form}
           onSubmit={handleSubmit}
         >
           {inputData.map((input) => {
-            return <Input key={input.id} {...input} onChange={onChange} isSubmitted={isSubmitted} />;
+            return (
+              <Input
+                key={input.id}
+                {...input}
+                value={formState.fields[input.id]}
+                formError={formState.formErrors[input.id]}
+                onChange={onChange}
+                isSubmitted={formState.isSubmitted}
+              />
+            );
           })}
           {textAreaData.map((textArea) => {
-            return <TextArea key={textArea.id} {...textArea} onChange={onChange} isSubmitted={isSubmitted} maxLength={textAreaMaxLength} />;
+            return (
+              <TextArea
+                key={textArea.id}
+                {...textArea}
+                value={formState.fields[textArea.id]}
+                formError={formState.formErrors[textArea.id]}
+                onChange={onChange}
+                isSubmitted={formState.isSubmitted}
+                maxLength={formState.textAreaMaxLength}
+              />
+            );
           })}
           <div className={styles.questionnaire__buttons}>
             <Button text="Отменить" type="button" handleCancel={handleCancel} />
             <Button text="Отправить" type="submit" />
           </div>
         </form>
-        <div ref={resultRef} className={isShowResult ? styles.questionnaire__results : `${styles.questionnaire__results} ${styles.none}`}>
+        <div ref={resultRef} className={formState.isShowResult ? styles.questionnaire__results : `${styles.questionnaire__results} ${styles.none}`}>
           {inputData.map(({ id, field, value }) => {
             return (
               <div className={styles.questionnaire__result} key={id}>
@@ -367,7 +212,7 @@ const Form = () => {
         <span ref={svgContainer} className={styles.questionnaire__svg}>
           <img src={msgSvg} alt="Your SVG" />
         </span>
-        <PopupMessages isShowSubmittedPopup={isShowSubmittedPopup} isShowCancelledPopup={isShowCancelledPopup} />
+        <PopupMessages isShowSubmittedPopup={formState.isShowSubmittedPopup} isShowCancelledPopup={formState.isShowCancelledPopup} />
       </div>
     </div>
   );
