@@ -90,6 +90,8 @@ const Form = () => {
       case "lastProject":
         isValid = validateTextArea(trimmedValue, formState.textAreaMaxLength);
         break;
+      default:
+        isValid = false;
     }
 
     if (!isValid) return "Что-то пошло не так";
