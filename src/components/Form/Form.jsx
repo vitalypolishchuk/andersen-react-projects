@@ -16,7 +16,9 @@ const Form = () => {
 
   const [formState, setFormState] = useState(initialState);
 
-  const handleCancel = () => {};
+  const handleCancel = () => {
+    setFormState({ ...initialState, isShowCancelledPopup: true });
+  };
 
   const handleSvgScroll = (e) => {
     formRef.current.scrollBy(e.deltaX, e.deltaY);
@@ -107,20 +109,17 @@ const Form = () => {
       .replace(patterns.addHyphen2, "$1-$2-")
       .replace(patterns.addHyphen3, "$1-$2-$3-");
 
-    setFormState({ ...formState, fields: { ...formState.fields, [id]: newValue } });
+    return newValue;
   };
 
   const onChange = ({ e, id }) => {
-    const value = e.target.value;
+    let value = e.target.value;
 
     if (id === "phone") {
-      phoneMask({ id, value });
-    } else {
-      setFormState({ ...formState, fields: { ...formState.fields, [id]: value } });
+      value = phoneMask({ id, value });
     }
+    setFormState({ ...formState, fields: { ...formState.fields, [id]: value } });
 
-    // if the info was submitted, it does not mean that all the fields are valid or filled!
-    // if the user, after submission changed any values, we need to validate them once again!
     if (formState.isSubmitted) {
       const err = validate({ id, value });
       setFormState({ ...formState, formErrors: { ...formState.formErrors, [id]: err }, fields: { ...formState.fields, [id]: value } });
@@ -138,7 +137,7 @@ const Form = () => {
       formErrorsNew[id] = err;
 
       if (allValuesValidAndFilled !== false) {
-        if (err === "") {
+        if (err === "" || err === undefined) {
           allValuesValidAndFilled = true;
         } else {
           allValuesValidAndFilled = false;
@@ -149,7 +148,7 @@ const Form = () => {
     setFormState({ ...formState, formErrors: formErrorsNew, isSubmitted: true });
 
     if (allValuesValidAndFilled) {
-      setFormState({ ...formState, isShowSubmittedPopup: true, isShowCancelledPopup: true });
+      setFormState({ ...formState, isShowSubmittedPopup: true, isShowResult: true });
     }
   };
 
@@ -157,11 +156,7 @@ const Form = () => {
     <div className="App">
       <div className={styles.questionnaire}>
         <p className={styles.questionnaire__title}>{formState.isShowResult ? "Результат" : "Создание анкеты"}</p>
-        <form
-          ref={formRef}
-          className={formState.isShowResult ? `${styles.questionnaire__form} ${styles.none}` : styles.questionnaire__form}
-          onSubmit={handleSubmit}
-        >
+        <form ref={formRef} className={formState.isShowResult ? styles.none : styles.questionnaire__form} onSubmit={handleSubmit}>
           {inputData.map((input) => {
             return (
               <Input
@@ -192,18 +187,18 @@ const Form = () => {
             <Button text="Отправить" type="submit" />
           </div>
         </form>
-        <div ref={resultRef} className={formState.isShowResult ? styles.questionnaire__results : `${styles.questionnaire__results} ${styles.none}`}>
-          {inputData.map(({ id, field, value }) => {
+        <div ref={resultRef} className={formState.isShowResult ? styles.questionnaire__results : styles.none}>
+          {inputData.map(({ id, field }) => {
             return (
               <div className={styles.questionnaire__result} key={id}>
-                {field}: {value}
+                {field}: {formState.fields[id]}
               </div>
             );
           })}
-          {textAreaData.map(({ id, field, value }) => {
+          {textAreaData.map(({ id, field }) => {
             return (
               <div className={styles.questionnaire__result} key={id}>
-                {field}: {value}
+                {field}: {formState.fields[id]}
               </div>
             );
           })}

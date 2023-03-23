@@ -6,12 +6,8 @@ const PopupMessages = (props) => {
 
   return (
     <>
-      <div className={isShowSubmittedPopup ? styles.questionnaire__sent : `${styles.questionnaire__sent} ${styles.hidden} ${styles.transparent}`}>
-        Данные отправлены!
-      </div>
-      <div className={isShowCancelledPopup ? styles.questionnaire__cancel : `${styles.questionnaire__cancel} ${styles.hidden} ${styles.transparent}`}>
-        Операция отменена!
-      </div>
+      <div className={isShowSubmittedPopup ? styles.questionnaire__sent : `${styles.hidden} ${styles.transparent}`}>Данные отправлены!</div>
+      <div className={isShowCancelledPopup ? styles.questionnaire__cancel : `${styles.hidden} ${styles.transparent}`}>Операция отменена!</div>
     </>
   );
 };
