@@ -1,8 +1,9 @@
 import styles from "./NumberTodo.module.css";
+import { AppState } from "../../../AppState.types";
 import { useSelector } from "react-redux";
 
 const NumberTodo = () => {
-  const todos = useSelector(({ todos }) => todos);
+  const todos = useSelector(({ todos }: AppState) => todos);
   const { list, inProcess, completed } = todos;
 
   return (

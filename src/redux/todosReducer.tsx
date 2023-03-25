@@ -6,7 +6,25 @@ const initialState = {
   completed: 0,
 };
 
-export const todosReducer = (state = initialState, action) => {
+type StateType = {
+  list: {
+    name: string;
+    id: string;
+    completed: boolean;
+  }[];
+  inProcess: number;
+  completed: number;
+};
+
+type ActionType = {
+  type: string;
+  payload: {
+    id?: string;
+    name?: string;
+  };
+};
+
+export const todosReducer = (state: StateType = initialState, action: ActionType) => {
   switch (action.type) {
     case ADD_TODO:
       return {
@@ -20,9 +38,9 @@ export const todosReducer = (state = initialState, action) => {
       return (() => {
         const { id } = action.payload;
         const findTodoIndex = state.list.findIndex((todo) => todo.id === id);
-        const todoCopy = { ...state.list[findTodoIndex] };
-        todoCopy.completed = true;
         if (findTodoIndex !== -1) {
+          const todoCopy = { ...state.list[findTodoIndex] };
+          todoCopy.completed = true;
           return {
             ...state,
             inProcess: state.inProcess - 1,
@@ -37,9 +55,9 @@ export const todosReducer = (state = initialState, action) => {
       return (() => {
         const { id } = action.payload;
         const findTodoIndex = state.list.findIndex((todo) => todo.id === id);
-        const todoCopy = { ...state.list[findTodoIndex] };
-        todoCopy.completed = false;
         if (findTodoIndex !== -1) {
+          const todoCopy = { ...state.list[findTodoIndex] };
+          todoCopy.completed = false;
           return {
             ...state,
             inProcess: state.inProcess + 1,
@@ -76,9 +94,9 @@ export const todosReducer = (state = initialState, action) => {
       return (() => {
         const { id, name } = action.payload;
         const findTodoIndex = state.list.findIndex((todo) => todo.id === id);
-        const todoCopy = { ...state.list[findTodoIndex] };
-        todoCopy.name = name;
         if (findTodoIndex !== -1) {
+          const todoCopy = { ...state.list[findTodoIndex] };
+          todoCopy.name = name!;
           return {
             ...state,
             list: [...state.list.slice(0, findTodoIndex), todoCopy, ...state.list.slice(findTodoIndex + 1)],

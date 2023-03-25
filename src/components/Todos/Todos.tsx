@@ -1,4 +1,5 @@
 import styles from "./Todos.module.css";
+import { AppState } from "../../AppState.types";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import BigButton from "../BigButton/BigButton";
@@ -8,11 +9,11 @@ import TodoList from "./TodoList/TodoList";
 import Popup from "../Popup/Popup";
 
 const Todo = () => {
-  const [isShowPopup, setIsShowPopup] = useState(false);
-  const name = useSelector((state) => state.name);
+  const [isShowPopup, setIsShowPopup] = useState<boolean>(false);
+  const name = useSelector(({ name }: AppState) => name);
 
   useEffect(() => {
-    let timerId;
+    let timerId: ReturnType<typeof setTimeout>;
 
     if (isShowPopup) {
       timerId = setTimeout(() => {

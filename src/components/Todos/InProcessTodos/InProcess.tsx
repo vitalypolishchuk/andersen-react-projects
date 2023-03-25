@@ -1,10 +1,11 @@
 import styles from "./InProcessTodos.module.css";
+import { AppState } from "../../../AppState.types";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import SingleTodo from "../SingleTodo/SingleTodo";
 
 const InProcessTodos = () => {
-  const todos = useSelector(({ todos }) => todos);
+  const todos = useSelector(({ todos }: AppState) => todos);
   const { list, inProcess } = todos;
 
   return (

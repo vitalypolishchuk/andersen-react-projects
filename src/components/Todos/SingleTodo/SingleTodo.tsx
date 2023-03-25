@@ -1,13 +1,14 @@
 import styles from "./SingleTodo.module.css";
+import { SingleTodoProps } from "./SingleTodo.types";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash, faCheck, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { addCompletedTodo, addUncompleteTodo, deleteTodo, renameTodo } from "../../../redux/actions";
 import { useState } from "react";
 
-const SingleTodo = ({ name, id, completed }) => {
-  const [isEdit, setIsEdit] = useState(false);
-  const [newTodoName, setNewTodoName] = useState(name);
+const SingleTodo = ({ name, id, completed }: SingleTodoProps) => {
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [newTodoName, setNewTodoName] = useState<string>(name);
   const dispatch = useDispatch();
 
   const HandleComplete = () => {

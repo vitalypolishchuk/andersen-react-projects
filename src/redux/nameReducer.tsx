@@ -2,7 +2,12 @@ import { EDIT_NAME } from "./types";
 
 const initialState = "";
 
-export const nameReducer = (state = initialState, action) => {
+type ActionType = {
+  type: string;
+  payload: string;
+};
+
+export const nameReducer = (state: string = initialState, action: ActionType) => {
   switch (action.type) {
     case EDIT_NAME:
       return action.payload;

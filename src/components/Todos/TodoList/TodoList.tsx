@@ -1,9 +1,10 @@
 import styles from "./TodoList.module.css";
+import { AppState } from "../../../AppState.types";
 import { useSelector } from "react-redux";
 import SingleTodo from "../SingleTodo/SingleTodo";
 
 const TodoList = () => {
-  const todos = useSelector(({ todos }) => todos);
+  const todos = useSelector(({ todos }: AppState) => todos);
 
   return (
     <div className={styles.container}>

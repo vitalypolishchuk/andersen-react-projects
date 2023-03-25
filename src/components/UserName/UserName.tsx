@@ -1,4 +1,5 @@
 import styles from "./UserName.module.css";
+import { FormEvent } from "react";
 import todoImg from "../../images/todo.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,14 +8,14 @@ import { editName } from "../../redux/actions";
 import Button from "../Button/Button";
 
 const UserName = () => {
-  const [name, setName] = useState("");
-  const [isSubmit, setIsSubmit] = useState(false);
-  const [warning, setWarning] = useState(false);
+  const [name, setName] = useState<string>("");
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const [warning, setWarning] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     setIsSubmit(true);

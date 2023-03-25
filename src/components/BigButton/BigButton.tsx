@@ -1,9 +1,10 @@
 import styles from "./BigButton.module.css";
+import { BigButtonProps } from "./BigButton.types";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBullseye, faCheck } from "@fortawesome/free-solid-svg-icons";
 
-const BigButton = ({ type, text, link }) => {
+const BigButton = ({ type, text, link }: BigButtonProps) => {
   return (
     <Link to={link} className={type === "active" ? styles.active_tasks : styles.done_tasks}>
       {text}
