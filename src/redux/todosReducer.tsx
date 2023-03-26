@@ -1,6 +1,6 @@
 import { ADD_COMPLETED_TODO, ADD_TODO, ADD_UNCOMPLETED_TODO, DELETE_TODO, RENAME_TODO } from "./types";
 
-const initialState = {
+export const initialState = {
   list: [],
   inProcess: 0,
   completed: 0,
