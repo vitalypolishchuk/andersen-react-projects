@@ -1,7 +1,7 @@
 import styles from "./Input.module.css";
 import React from "react";
 
-const Input = ({ id, field, inputType, placeholder, value, formError, onChange, isSubmitted }) => {
+const Input = React.memo(({ id, field, inputType, placeholder, value, formError, onChange, isSubmitted }) => {
   return (
     <>
       <label className={styles.questionnaire__label} htmlFor={id}>
@@ -25,6 +25,6 @@ const Input = ({ id, field, inputType, placeholder, value, formError, onChange, 
       </div>
     </>
   );
-};
+});
 
 export default Input;

@@ -1,5 +1,5 @@
 import styles from "./Form.module.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import msgSvg from "../../images/msg.svg";
 import { validateUpperCase, validateDate, validatePhone, validateWebsite, validateTextArea } from "../Validation/Validation";
 import Input from "../Input/Input";
@@ -63,39 +63,42 @@ const Form = () => {
     };
   }, [formState.isShowSubmittedPopup]);
 
-  const validate = ({ id, value }) => {
-    // remove spaces from the beginning and the end
-    const trimmedValue = value.trim();
+  const validate = useCallback(
+    ({ id, value }) => {
+      // remove spaces from the beginning and the end
+      const trimmedValue = value.trim();
 
-    if (trimmedValue === "") return "Поле не заполнено";
+      if (trimmedValue === "") return "Поле не заполнено";
 
-    let isValid;
+      let isValid;
 
-    switch (id) {
-      case "name":
-      case "surname":
-        isValid = validateUpperCase(trimmedValue);
-        break;
-      case "birthday":
-        isValid = validateDate(trimmedValue);
-        break;
-      case "phone":
-        isValid = validatePhone(trimmedValue);
-        break;
-      case "website":
-        isValid = validateWebsite(trimmedValue);
-        break;
-      case "aboutMe":
-      case "technologies":
-      case "lastProject":
-        isValid = validateTextArea(trimmedValue, formState.textAreaMaxLength);
-        break;
-      default:
-        isValid = false;
-    }
+      switch (id) {
+        case "name":
+        case "surname":
+          isValid = validateUpperCase(trimmedValue);
+          break;
+        case "birthday":
+          isValid = validateDate(trimmedValue);
+          break;
+        case "phone":
+          isValid = validatePhone(trimmedValue);
+          break;
+        case "website":
+          isValid = validateWebsite(trimmedValue);
+          break;
+        case "aboutMe":
+        case "technologies":
+        case "lastProject":
+          isValid = validateTextArea(trimmedValue, formState.textAreaMaxLength);
+          break;
+        default:
+          isValid = false;
+      }
 
-    if (!isValid) return "Что-то пошло не так";
-  };
+      if (!isValid) return "Что-то пошло не так";
+    },
+    [formState.textAreaMaxLength]
+  );
 
   const phoneMask = ({ id, value }) => {
     const patterns = {
@@ -114,19 +117,29 @@ const Form = () => {
     return newValue;
   };
 
-  const onChange = ({ e, id }) => {
-    let value = e.target.value;
+  const onChange = useCallback(
+    // wrap onChange with useCallback not to create new instance of onChange every time Form component updates
+    // so that the same instance of this function would be passed as an argument to each Input and TextArea
+    ({ e, id }) => {
+      let value = e.target.value;
 
-    if (id === "phone") {
-      value = phoneMask({ id, value });
-    }
-    setFormState({ ...formState, fields: { ...formState.fields, [id]: value } });
+      if (id === "phone") {
+        value = phoneMask({ id, value });
+      }
 
-    if (formState.isSubmitted) {
-      const err = validate({ id, value });
-      setFormState({ ...formState, formErrors: { ...formState.formErrors, [id]: err }, fields: { ...formState.fields, [id]: value } });
-    }
-  };
+      setFormState((prevState) => {
+        return { ...prevState, fields: { ...prevState.fields, [id]: value } };
+      });
+
+      if (formState.isSubmitted) {
+        const err = validate({ id, value });
+        setFormState((prevState) => {
+          return { ...prevState, formErrors: { ...prevState.formErrors, [id]: err } };
+        });
+      }
+    },
+    [formState.isSubmitted, validate]
+  );
 
   const handleSubmit = (e) => {
     if (e) e.preventDefault();
@@ -150,7 +163,9 @@ const Form = () => {
     setFormState({ ...formState, formErrors: formErrorsNew, isSubmitted: true });
 
     if (allValuesValidAndFilled) {
-      setFormState({ ...formState, isShowSubmittedPopup: true, isShowResult: true });
+      setFormState((prevState) => {
+        return { ...prevState, isShowSubmittedPopup: true, isShowResult: true };
+      });
     }
   };
 

@@ -1,7 +1,7 @@
 import styles from "./TextArea.module.css";
 import React from "react";
 
-const TextArea = ({ id, field, value, formError, onChange, isSubmitted, maxLength }) => {
+const TextArea = React.memo(({ id, field, value, formError, onChange, isSubmitted, maxLength }) => {
   return (
     <>
       <label className={styles.questionnaire__label} htmlFor={id}>
@@ -26,6 +26,6 @@ const TextArea = ({ id, field, value, formError, onChange, isSubmitted, maxLengt
       </div>
     </>
   );
-};
+});
 
 export default TextArea;
