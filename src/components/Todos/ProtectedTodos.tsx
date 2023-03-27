@@ -3,9 +3,9 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import { AppState } from "../../AppState.types";
 
-type ProtectedTodosProps = {
+interface ProtectedTodosProps {
   children: React.ReactNode;
-};
+}
 
 const ProtectedTodos = ({ children }: ProtectedTodosProps) => {
   const name = useSelector(({ name }: AppState) => name);

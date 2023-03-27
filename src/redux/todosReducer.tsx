@@ -6,7 +6,7 @@ export const initialState = {
   completed: 0,
 };
 
-type StateType = {
+interface StateType {
   list: {
     name: string;
     id: string;
@@ -14,15 +14,15 @@ type StateType = {
   }[];
   inProcess: number;
   completed: number;
-};
+}
 
-type ActionType = {
+interface ActionType {
   type: string;
   payload: {
     id?: string;
     name?: string;
   };
-};
+}
 
 export const todosReducer = (state: StateType = initialState, action: ActionType) => {
   switch (action.type) {

@@ -2,10 +2,10 @@ import { EDIT_NAME } from "./types";
 
 const initialState = "";
 
-type ActionType = {
+interface ActionType {
   type: string;
   payload: string;
-};
+}
 
 export const nameReducer = (state: string = initialState, action: ActionType) => {
   switch (action.type) {

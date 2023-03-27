@@ -1,4 +1,4 @@
-export type AppState = {
+export interface AppState {
   todos: {
     list: {
       name: string;
@@ -9,4 +9,4 @@ export type AppState = {
     completed: number;
   };
   name: string;
-};
+}

@@ -1,11 +1,14 @@
 import styles from "./CreateTodo.module.css";
-import { CreateTodoProps } from "./CreateTodo.types";
 import { FormSubmitEvent } from "../../../EventTypes.types";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { addTodo } from "../../../redux/actions";
+
+interface CreateTodoProps {
+  setIsShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const CreateTodo = ({ setIsShowPopup }: CreateTodoProps) => {
   const [todo, setTodo] = useState<string>("");

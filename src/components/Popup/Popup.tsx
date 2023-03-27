@@ -1,5 +1,8 @@
 import styles from "./Popup.module.css";
-import { PopupProps } from "./Popup.types";
+
+interface PopupProps {
+  text: string;
+}
 
 const Popup = ({ text }: PopupProps) => {
   return <div className={styles.popup}>{text}</div>;

@@ -1,8 +1,13 @@
 import styles from "./BigButton.module.css";
-import { BigButtonProps } from "./BigButton.types";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBullseye, faCheck } from "@fortawesome/free-solid-svg-icons";
+
+interface BigButtonProps {
+  type: string;
+  text: string;
+  link: string;
+}
 
 const BigButton = ({ type, text, link }: BigButtonProps) => {
   return (
