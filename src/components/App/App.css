@@ -1,0 +1,83 @@
+@import "../variables.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  font-family: "Neucha", cursive;
+}
+
+input,
+button,
+select,
+textarea,
+optgroup,
+option {
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+}
+
+img {
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+link:active,
+link:visited {
+  color: black;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+textarea {
+  border-style: none;
+  border-color: Transparent;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+.App {
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(142, 197, 252, 0.8), rgba(224, 195, 252, 0.8)), url("../../images/background.jpg") center/cover fixed;
+  position: relative;
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-width: auto;
+  scrollbar-color: #858585 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #858585;
+  border-radius: 15px;
+  border: 3px solid #ffffff;
+}
+
+input[type="date"]:invalid::-webkit-datetime-edit {
+  color: #999;
+}

@@ -1,0 +1,42 @@
+@import "../variables.css";
+
+.questionnaire__label {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  width: 100%;
+}
+
+.questionnaire__input {
+  background-color: var(--bg-additional);
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 200px;
+  /* margin-bottom: 1.1rem; */
+  margin-left: 0.2rem;
+}
+
+.questionnaire__input:focus {
+  background-color: #ebebeb;
+  outline: 2px solid #816dd6;
+}
+.questionnaire__errors {
+  min-height: 1.5rem;
+  position: relative;
+}
+
+.questionnaire__error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-bottom: 1rem;
+  margin-left: 0.2rem;
+  color: red;
+}
+
+.hidden {
+  visibility: hidden;
+}

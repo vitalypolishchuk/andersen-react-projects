@@ -1,0 +1,35 @@
+@import "../variables.css";
+
+.questionnaire__sent {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 1.5rem;
+  padding: 0.5rem 3rem;
+  border-radius: 15px;
+  transition: 0.3s all;
+  background-color: var(--bg-third);
+}
+
+.questionnaire__cancel {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 1.5rem;
+  padding: 0.5rem 3rem;
+  border-radius: 15px;
+  transition: 0.3s all;
+  background-color: rgb(255, 203, 106);
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.transparent {
+  opacity: 0;
+}
