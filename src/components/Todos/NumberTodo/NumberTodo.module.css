@@ -1,0 +1,60 @@
+.container {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.container_inner {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.name {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  padding: 0.2rem;
+  color: #fff;
+}
+
+.number {
+  color: #fff;
+  padding: 0.2rem 1rem;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  font-weight: bold;
+}
+
+li:nth-child(1) .name {
+  background-color: rgba(87, 191, 245);
+}
+
+li:nth-child(1) .number {
+  background-color: rgba(25, 90, 189, 1);
+}
+
+li:nth-child(2) .name {
+  background-color: rgb(34, 211, 79);
+}
+
+li:nth-child(2) .number {
+  background-color: rgb(22, 137, 51);
+}
+
+li:nth-child(3) .name {
+  background-color: rgb(241, 42, 221);
+}
+
+li:nth-child(3) .number {
+  background-color: rgb(157, 27, 144);
+}
+
+@media screen and (min-width: 586px) {
+  .container {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    flex-direction: row;
+    width: 100%;
+    max-width: 600px;
+    justify-content: space-between;
+  }
+}
